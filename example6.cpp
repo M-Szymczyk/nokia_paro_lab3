@@ -4,24 +4,20 @@
 
 using ShoppingList = std::shared_ptr<std::FILE>;
 
-ShoppingList makeFile(const char* filename, const char* flags)
-{
-    /*Edit here*/
-    return std::shared_ptr<std::FILE>();
+ShoppingList makeFile(const char *filename, const char *flags) {
+    return std::shared_ptr<std::FILE>(std::fopen(filename, flags), [](FILE *f) { fclose(f); });
 }
 
-class Partner
-{
+class Partner {
 public:
-    void addToFile(std::string element)
-    {
-        /*Edit here*/
+    void addToFile(std::string element) {
+        fprintf(shoppingList.get(), "%s", element.c_str());
     }
+
     ShoppingList shoppingList;
 };
 
-int main()
-{
+int main() {
     Partner boy{};
     boy.shoppingList = makeFile("ShoppingList", "wb");
 
