@@ -32,7 +32,6 @@ int main(int argc, char *argv[]) {
     Resource *rsc = nullptr;
 
 
-
     try {
         rsc = new Resource();
         rsc->use(argument);
@@ -40,9 +39,9 @@ int main(int argc, char *argv[]) {
     catch (myPersonalException &e) {
         std::cout << e.what() << std::endl;
     }
-    if (rsc != nullptr) {
-        delete rsc;
-    }
+
+    delete rsc;
+
 
     return 0;
 }
