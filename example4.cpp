@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stdexcept>
-#include <memory>
 
 void foo()
 {
@@ -12,7 +11,12 @@ class MyPointer
 public:
     MyPointer(): pointer(new int(15))
     {
-        foo();
+        try {
+            foo();
+        }catch (std::runtime_error &e){
+            delete pointer;
+            throw std::runtime_error(e.what());
+        }
     }
 
     ~MyPointer()
